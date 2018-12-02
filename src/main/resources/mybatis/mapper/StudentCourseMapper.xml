@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.stusys.dao.StudentCourseMapper" >
+  <resultMap id="BaseResultMap" type="com.stusys.pojo.StudentCourse" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="child_course_id" property="childCourseId" jdbcType="INTEGER" />
+    <result column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="daily_score" property="dailyScore" jdbcType="DECIMAL" />
+    <result column="exam_score" property="examScore" jdbcType="DECIMAL" />
+    <result column="final_score" property="finalScore" jdbcType="DECIMAL" />
+    <result column="credit" property="credit" jdbcType="DECIMAL" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, child_course_id, student_id, daily_score, exam_score, final_score, credit, state, 
+    create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from student_course
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student_course
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.stusys.pojo.StudentCourse" >
+    insert into student_course (id, child_course_id, student_id, 
+      daily_score, exam_score, final_score, 
+      credit, state, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{childCourseId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, 
+      #{dailyScore,jdbcType=DECIMAL}, #{examScore,jdbcType=DECIMAL}, #{finalScore,jdbcType=DECIMAL}, 
+      #{credit,jdbcType=DECIMAL}, #{state,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.stusys.pojo.StudentCourse" >
+    insert into student_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="childCourseId != null" >
+        child_course_id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="dailyScore != null" >
+        daily_score,
+      </if>
+      <if test="examScore != null" >
+        exam_score,
+      </if>
+      <if test="finalScore != null" >
+        final_score,
+      </if>
+      <if test="credit != null" >
+        credit,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="childCourseId != null" >
+        #{childCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="dailyScore != null" >
+        #{dailyScore,jdbcType=DECIMAL},
+      </if>
+      <if test="examScore != null" >
+        #{examScore,jdbcType=DECIMAL},
+      </if>
+      <if test="finalScore != null" >
+        #{finalScore,jdbcType=DECIMAL},
+      </if>
+      <if test="credit != null" >
+        #{credit,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.stusys.pojo.StudentCourse" >
+    update student_course
+    <set >
+      <if test="childCourseId != null" >
+        child_course_id = #{childCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        student_id = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="dailyScore != null" >
+        daily_score = #{dailyScore,jdbcType=DECIMAL},
+      </if>
+      <if test="examScore != null" >
+        exam_score = #{examScore,jdbcType=DECIMAL},
+      </if>
+      <if test="finalScore != null" >
+        final_score = #{finalScore,jdbcType=DECIMAL},
+      </if>
+      <if test="credit != null" >
+        credit = #{credit,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.stusys.pojo.StudentCourse" >
+    update student_course
+    set child_course_id = #{childCourseId,jdbcType=INTEGER},
+      student_id = #{studentId,jdbcType=INTEGER},
+      daily_score = #{dailyScore,jdbcType=DECIMAL},
+      exam_score = #{examScore,jdbcType=DECIMAL},
+      final_score = #{finalScore,jdbcType=DECIMAL},
+      credit = #{credit,jdbcType=DECIMAL},
+      state = #{state,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<context id="testTables" targetRuntime="MyBatis3">
+		<!-- genenat entity时,生成toString -->
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/student_manage" userId="root" password="6611282">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- targetProject:生成PO类的位置 -->
+		<javaModelGenerator targetPackage="com.stusys.pojo" targetProject=".\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- targetProject:mapper映射文件生成的位置 -->
+		<sqlMapGenerator targetPackage="mybatis.mapper" targetProject=".\src\main\resources">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+		<!-- targetPackage：mapper接口生成的位置 -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.stusys.dao" targetProject=".\src\main\java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		<!-- generate entity时，生成hashcode和equals方法
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+         -->
+		<!-- 此处是将UserMapper.xml改名为UserDao.xml 当然 想改成什么都行~
+		<plugin type="org.mybatis.generator.plugins.rename.RenameSqlMapperPlugin">
+			<property name="searchString" value="Mapper" />
+			<property name="replaceString" value="Dao" />
+		</plugin>-->
+
+		<!-- 此处是将UserMapper改名为UserDao 接口 当然 想改成什么都行~
+		<plugin type="org.mybatis.generator.plugins.rename.RenameJavaMapperPlugin">
+			<property name="searchString" value="Mapper$" />
+			<property name="replaceString" value="Dao" />
+		</plugin>-->
+		<!-- 指定数据库表 -->
+		<table tableName="student_course" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="student" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="class" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="major" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="manager" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="child_course" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="course" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="department" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="teacher_course" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+		<table tableName="teacher" enableCountByExample="false"
+			   enableUpdateByExample="false" enableDeleteByExample="false"
+			   enableSelectByExample="false" selectByExampleQueryId="false"></table>
+	</context>
+</generatorConfiguration>
+
