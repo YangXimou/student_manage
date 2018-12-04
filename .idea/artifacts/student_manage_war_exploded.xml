@@ -33,6 +33,9 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.1.8" />
           <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:1.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.5" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

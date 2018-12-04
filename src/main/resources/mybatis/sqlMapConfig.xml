@@ -41,9 +41,9 @@
     </dataSource>
     </environment>
     </environments>
-    <!--<mappers>-->
-        <!--<package name="com.stusys.dao" />-->
-    <!--</mappers>-->
+    <mappers>
+        <package name="com.stusys.dao" />
+    </mappers>
 
     <!--<plugins>-->
         <!--<plugin interceptor="com.github.pagehelper.PageHelper">-->

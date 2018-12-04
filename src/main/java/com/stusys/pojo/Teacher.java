@@ -15,6 +15,8 @@ public class Teacher {
 
     private Integer departmentId;
 
+    private String officeAddress;
+
     private String identity;
 
     private String politicalStatus;
@@ -79,6 +81,14 @@ public class Teacher {
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public String getOfficeAddress() {
+        return officeAddress;
+    }
+
+    public void setOfficeAddress(String officeAddress) {
+        this.officeAddress = officeAddress == null ? null : officeAddress.trim();
     }
 
     public String getIdentity() {
@@ -165,6 +175,7 @@ public class Teacher {
         sb.append(", name=").append(name);
         sb.append(", sex=").append(sex);
         sb.append(", departmentId=").append(departmentId);
+        sb.append(", officeAddress=").append(officeAddress);
         sb.append(", identity=").append(identity);
         sb.append(", politicalStatus=").append(politicalStatus);
         sb.append(", nationality=").append(nationality);

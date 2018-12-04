@@ -13,7 +13,7 @@ import java.util.List;
  * Created by Simon on 2018/12/2.
  */
 @Service
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
     public Student justTest(){

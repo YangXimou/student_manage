@@ -24,7 +24,7 @@
     id, student_id, password, name, sex, department_id, major_id, grade, class_id, political_status, 
     nationality, enrollment_date, phone, address, state, image, create_time
   </sql>
-  <select id="selectAll" resultMap="BaseResultMap" >
+  <select id="selectAll" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from student

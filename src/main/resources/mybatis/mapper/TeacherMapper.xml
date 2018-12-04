@@ -8,6 +8,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="office_address" property="officeAddress" jdbcType="VARCHAR" />
     <result column="identity" property="identity" jdbcType="VARCHAR" />
     <result column="political_status" property="politicalStatus" jdbcType="VARCHAR" />
     <result column="nationality" property="nationality" jdbcType="VARCHAR" />
@@ -19,8 +20,8 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, teacher_id, password, name, sex, department_id, identity, political_status, nationality, 
-    enrollment_date, phone, address, state, image, create_time
+    id, teacher_id, password, name, sex, department_id, office_address, identity, political_status, 
+    nationality, enrollment_date, phone, address, state, image, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -35,16 +36,16 @@
   <insert id="insert" parameterType="com.stusys.pojo.Teacher" >
     insert into teacher (id, teacher_id, password, 
       name, sex, department_id, 
-      identity, political_status, nationality, 
-      enrollment_date, phone, address, 
-      state, image, create_time
-      )
+      office_address, identity, political_status, 
+      nationality, enrollment_date, phone, 
+      address, state, image, 
+      create_time)
     values (#{id,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, 
-      #{identity,jdbcType=VARCHAR}, #{politicalStatus,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, 
-      #{enrollmentDate,jdbcType=TIMESTAMP}, #{phone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{state,jdbcType=TINYINT}, #{image,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{officeAddress,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, #{politicalStatus,jdbcType=VARCHAR}, 
+      #{nationality,jdbcType=VARCHAR}, #{enrollmentDate,jdbcType=TIMESTAMP}, #{phone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{image,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.stusys.pojo.Teacher" >
     insert into teacher
@@ -66,6 +67,9 @@
       </if>
       <if test="departmentId != null" >
         department_id,
+      </if>
+      <if test="officeAddress != null" >
+        office_address,
       </if>
       <if test="identity != null" >
         identity,
@@ -114,6 +118,9 @@
       <if test="departmentId != null" >
         #{departmentId,jdbcType=INTEGER},
       </if>
+      <if test="officeAddress != null" >
+        #{officeAddress,jdbcType=VARCHAR},
+      </if>
       <if test="identity != null" >
         #{identity,jdbcType=VARCHAR},
       </if>
@@ -161,6 +168,9 @@
       <if test="departmentId != null" >
         department_id = #{departmentId,jdbcType=INTEGER},
       </if>
+      <if test="officeAddress != null" >
+        office_address = #{officeAddress,jdbcType=VARCHAR},
+      </if>
       <if test="identity != null" >
         identity = #{identity,jdbcType=VARCHAR},
       </if>
@@ -198,6 +208,7 @@
       name = #{name,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=VARCHAR},
       department_id = #{departmentId,jdbcType=INTEGER},
+      office_address = #{officeAddress,jdbcType=VARCHAR},
       identity = #{identity,jdbcType=VARCHAR},
       political_status = #{politicalStatus,jdbcType=VARCHAR},
       nationality = #{nationality,jdbcType=VARCHAR},

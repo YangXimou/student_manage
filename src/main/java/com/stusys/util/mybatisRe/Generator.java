@@ -1,4 +1,4 @@
-package com.stusys.utils.mybatisRe;
+package com.stusys.util.mybatisRe;
 
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
