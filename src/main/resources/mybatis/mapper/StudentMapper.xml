@@ -20,6 +20,19 @@
     <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="completeStuMap" type="com.stusys.dto.StudentDto" extends="BaseResultMap">
+    <!--association的property指明了映射到返回值对象里的哪个属性，column表示用当前sql中的哪个字段作为关联查询的传入参数-->
+    <association property="departmentName"  select="com.stusys.dao.DepartmentMapper.selectName" column="department_id" fetchType="eager"></association>
+    <association property="majorName"  select="com.stusys.dao.MajorMapper.selectName" column="major_id" fetchType="eager"></association>
+    <association property="className"  select="com.stusys.dao.ClassMapper.selectName" column="class_id" fetchType="eager"></association>
+  </resultMap>
+  <resultMap id="stuChildCourseMap" type="com.stusys.pojo.ChildCourse" extends="BaseResultMap">
+    <!--association的property指明了映射到返回值对象里的哪个属性，column表示用当前sql中的哪个字段作为关联查询的传入参数-->
+    <association property="departmentName"  select="com.stusys.dao.DepartmentMapper.selectName" column="department_id" fetchType="eager"></association>
+    <association property="majorName"  select="com.stusys.dao.MajorMapper.selectName" column="major_id" fetchType="eager"></association>
+    <association property="className"  select="com.stusys.dao.ClassMapper.selectName" column="class_id" fetchType="eager"></association>
+  </resultMap>
+
   <sql id="Base_Column_List" >
     id, student_id, password, name, sex, department_id, major_id, grade, class_id, political_status, 
     nationality, enrollment_date, phone, address, state, image, create_time
@@ -29,6 +42,25 @@
     <include refid="Base_Column_List" />
     from student
   </select>
+  <select id="getPassword" resultType="String">
+    select password from student where student_id=#{studentId}
+  </select>
+  <!--<select id="selectByStudentId" resultMap="BaseResultMap">-->
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--from student-->
+    <!--where student_id=#{studentId}-->
+  <!--</select>-->
+  <select id="selectDetailByStudentId" resultMap="completeStuMap">
+    select <include refid="Base_Column_List" />
+    from student
+    where student_id=#{studentId}
+  </select>
+
+
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
@@ -162,12 +194,12 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.stusys.pojo.Student" >
+
+
+
+  <update id="updateByStudentIdSelective" parameterType="com.stusys.pojo.Student" >
     update student
     <set >
-      <if test="studentId != null" >
-        student_id = #{studentId,jdbcType=INTEGER},
-      </if>
       <if test="password != null" >
         password = #{password,jdbcType=VARCHAR},
       </if>
@@ -214,8 +246,11 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where student_id = #{studentId,jdbcType=INTEGER}
   </update>
+
+
+
   <update id="updateByPrimaryKey" parameterType="com.stusys.pojo.Student" >
     update student
     set student_id = #{studentId,jdbcType=INTEGER},

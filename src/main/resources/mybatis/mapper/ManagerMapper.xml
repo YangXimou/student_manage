@@ -10,6 +10,18 @@
   <sql id="Base_Column_List" >
     id, manager_id, password, create_time
   </sql>
+  <select id="getPassword" resultType="String">
+    select password from manager where manager_id=#{managerId}
+  </select>
+  <select id="selectByManagerId" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from manager
+    where manager_id=#{managerId}
+  </select>
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

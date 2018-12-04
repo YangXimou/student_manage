@@ -10,6 +10,16 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <select id="selectName" resultType="String" parameterType="java.lang.Integer" >
+    select name
+    from class
+    where class_id = #{classId}
+  </select>
+
+
+
+
+
   <sql id="Base_Column_List" >
     id, class_id, department_id, major_id, grade, name, create_time
   </sql>

@@ -1,5 +1,6 @@
 package com.stusys.dao;
 
+import com.stusys.dto.StudentDto;
 import com.stusys.pojo.Student;
 
 import java.util.List;
@@ -13,9 +14,13 @@ public interface StudentMapper {
 
     Student selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(Student record);
+    StudentDto selectDetailByStudentId(Integer studentId);
+
+    int updateByStudentIdSelective(Student record);
 
     int updateByPrimaryKey(Student record);
 
     List<Student> selectAll();
+
+    String getPassword(Integer studentId);
 }

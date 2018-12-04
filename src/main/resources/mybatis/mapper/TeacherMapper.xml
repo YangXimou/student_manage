@@ -23,6 +23,20 @@
     id, teacher_id, password, name, sex, department_id, office_address, identity, political_status, 
     nationality, enrollment_date, phone, address, state, image, create_time
   </sql>
+  <select id="getPassword" resultType="String">
+    select password from teacher where teacher_id=#{teacherId}
+  </select>
+  <select id="selectByTeacherId" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from teacher
+    where teacher_id=#{teacherId}
+  </select>
+
+
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

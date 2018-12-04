@@ -11,11 +11,30 @@
     <result column="state" property="state" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="DetailPlusMap" type="">
+
+  </resultMap>
   <sql id="Base_Column_List" >
     id, child_course_id, course_id, name, credit, class_time, state, create_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByChildCourseId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
+    <include refid="Base_Column_List" />
+    from child_course
+    where child_course_id = #{childCourseId}
+  </select>
+  <select id="selectDetailPlus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from child_course
+    where child_course_id = #{childCourseId}
+  </select>
+
+
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
     <include refid="Base_Column_List" />
     from child_course
     where id = #{id,jdbcType=INTEGER}

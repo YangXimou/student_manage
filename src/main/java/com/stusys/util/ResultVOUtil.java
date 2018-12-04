@@ -7,7 +7,7 @@ import com.stusys.vo.ResultVO;
 /**
  * Created by Simon on 2018/12/3.
  */
-public class ResultVoUtil {
+public class ResultVOUtil {
     public static ResultVO success(){
         ResultVO resultVO=new ResultVO();
         resultVO.setCode(ResultEnum.SUCCESS.getCode());
@@ -20,5 +20,23 @@ public class ResultVoUtil {
         resultDataVO.setMsg(ResultEnum.SUCCESS.getMessage());
         resultDataVO.setData(object);
         return resultDataVO;
+    }
+    public static ResultVO success(String msg){
+        ResultVO resultVO=new ResultVO();
+        resultVO.setCode(ResultEnum.SUCCESS.getCode());
+        resultVO.setMsg(msg);
+        return resultVO;
+    }
+    public static ResultVO error(){
+        ResultVO resultVO=new ResultVO();
+        resultVO.setCode(ResultEnum.ERROR.getCode());
+        resultVO.setMsg(ResultEnum.ERROR.getMessage());
+        return resultVO;
+    }
+    public static ResultVO error(String msg){
+        ResultVO resultVO=new ResultVO();
+        resultVO.setCode(ResultEnum.ERROR.getCode());
+        resultVO.setMsg(msg);
+        return resultVO;
     }
 }

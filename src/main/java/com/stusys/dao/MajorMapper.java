@@ -14,4 +14,6 @@ public interface MajorMapper {
     int updateByPrimaryKeySelective(Major record);
 
     int updateByPrimaryKey(Major record);
+
+    String selectName(Integer majorId);
 }

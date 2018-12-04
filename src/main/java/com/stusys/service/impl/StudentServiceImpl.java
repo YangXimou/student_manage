@@ -1,12 +1,17 @@
 package com.stusys.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.stusys.dao.ChildCourseMapper;
+import com.stusys.dao.StudentCourseMapper;
 import com.stusys.dao.StudentMapper;
+import com.stusys.dto.StudentDto;
+import com.stusys.pojo.ChildCourse;
 import com.stusys.pojo.Student;
 import com.stusys.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,15 +21,37 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper studentMapper;
-    public Student justTest(){
-        Student student=studentMapper.selectByPrimaryKey(1);
-        System.out.println(student);
-        PageHelper.startPage(2,3);
-        List<Student> studentList=studentMapper.selectAll();
-        for (Student stu:studentList
-                ) {
-            System.out.println(stu);
-        }
-        return student;
+    @Autowired
+    private ChildCourseMapper childCourseMapper;
+    @Autowired
+    private StudentCourseMapper studentCourseMapper;
+    //    根据学号获取学生详细信息
+    public StudentDto getDetailByStudentId(Integer studentId){
+        StudentDto studentDto=studentMapper.selectDetailByStudentId(studentId);
+        return studentDto;
+    }
+    //    修改学生的联系号码、家庭住址
+    public Integer updateSelf(Integer studentId,String phone,String address){
+        Student student=new Student();
+        student.setStudentId(studentId);
+        student.setAddress(address);
+        student.setPhone(phone);
+        return studentMapper.updateByStudentIdSelective(student);
+    }
+    //    修改学生的密码
+    public Integer changePassword(Integer studentId,String newPassword){
+        Student student=new Student();
+        student.setStudentId(studentId);
+        student.setPassword(newPassword);
+        return studentMapper.updateByStudentIdSelective(student);
+    }
+
+    public List<ChildCourse> getChildCourseByStudentId(Integer studentId, Integer pageNum, Integer pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        List<Integer> childCourseIdList = studentCourseMapper.selectChildCourseId(studentId);
+        List<ChildCourse> childCourseList=new ArrayList<>();
+        for(Integer childCourseId:childCourseIdList)
+            childCourseList.add(childCourseMapper.selectByChildCourseId(childCourseId));
+        return childCourseList;
     }
 }

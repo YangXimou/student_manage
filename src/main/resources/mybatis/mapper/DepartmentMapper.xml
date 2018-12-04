@@ -11,6 +11,15 @@
   <sql id="Base_Column_List" >
     id, department_id, name, introductions, create_time
   </sql>
+  <select id="selectName" resultType="String" parameterType="java.lang.Integer" >
+    select name
+    from department
+    where department_id = #{departmentId}
+  </select>
+
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

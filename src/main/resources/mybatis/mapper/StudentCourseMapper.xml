@@ -16,6 +16,14 @@
     id, child_course_id, student_id, daily_score, exam_score, final_score, credit, state, 
     create_time
   </sql>
+  <select id="selectChildCourseId" resultType="Integer" parameterType="java.lang.Integer" >
+  select child_course_id
+  from student_course
+  where student_id = #{studentId}
+</select>
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

@@ -1,10 +1,17 @@
 package com.stusys.service;
 
+import com.stusys.dto.StudentDto;
+import com.stusys.pojo.ChildCourse;
 import com.stusys.pojo.Student;
+
+import java.util.List;
 
 /**
  * Created by Simon on 2018/12/2.
  */
 public interface StudentService {
-    public Student justTest();
+    public StudentDto getDetailByStudentId(Integer studentId);
+    public Integer updateSelf(Integer studentId,String phone,String address);
+    public Integer changePassword(Integer studentId,String newPassword);
+    public List<ChildCourse> getChildCourseByStudentId(Integer studentId, Integer pageNum, Integer pageSize);
 }

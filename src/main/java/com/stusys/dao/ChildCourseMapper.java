@@ -14,4 +14,7 @@ public interface ChildCourseMapper {
     int updateByPrimaryKeySelective(ChildCourse record);
 
     int updateByPrimaryKey(ChildCourse record);
+
+    ChildCourse selectByChildCourseId(Integer childCourseId);
+
 }
