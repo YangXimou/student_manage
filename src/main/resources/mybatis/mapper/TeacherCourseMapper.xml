@@ -7,9 +7,31 @@
     <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="TeacherBaseMap" type="com.stusys.dto.TeacherBaseDto">
+    <result column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+    <association property="teacherName" select="com.stusys.dao.TeacherMapper.getName" column="teacher_id" fetchType="eager"></association>
+  </resultMap>
+  <resultMap id="ChildCourseBaseMap" type="com.stusys.dto.ChildCourseSelfDto">
+    <association property="childCourse" select="com.stusys.dao.ChildCourseMapper.selectByChildCourseId" column="child_course_id" fetchType="eager"></association>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, child_course_id, teacher_id, create_time
   </sql>
+  <select id="selectTeacherBase" resultMap="TeacherBaseMap">
+    select teacher_id
+    from teacher_course
+    where child_course_id = #{childCourseId}
+  </select>
+  <select id="selectChildCourseBase" resultMap="ChildCourseBaseMap">
+    select child_course_id
+    from teacher_course
+    where teacher_id = #{teacherId}
+  </select>
+
+
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

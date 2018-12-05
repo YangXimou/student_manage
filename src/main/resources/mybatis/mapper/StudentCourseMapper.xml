@@ -12,15 +12,62 @@
     <result column="state" property="state" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="DetailPlusMap" type="com.stusys.dto.StudentCourseDetailDto" extends="BaseResultMap">
+    <association property="courseDetail" select="com.stusys.dao.ChildCourseMapper.selectDetailPlus" column="child_course_id" fetchType="eager"></association>
+    <association property="teacherBase" select="com.stusys.dao.TeacherCourseMapper.selectTeacherBase" column="child_course_id" fetchType="eager"></association>
+  </resultMap>
+  <resultMap id="ChildCourseBaseMap" type="com.stusys.dto.ChildCourseSelfDto">
+    <association property="childCourse" select="com.stusys.dao.ChildCourseMapper.selectByChildCourseId" column="child_course_id" fetchType="eager"></association>
+  </resultMap>
+  <resultMap id="StudentsBaseMap" type="com.stusys.dto.StudentSelfDto">
+    <association property="student" select="com.stusys.dao.StudentMapper.selectBaseByStudentId" column="student_id" fetchType="eager"></association>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, child_course_id, student_id, daily_score, exam_score, final_score, credit, state, 
     create_time
   </sql>
-  <select id="selectChildCourseId" resultType="Integer" parameterType="java.lang.Integer" >
+  <select id="selectChildCourseBase" resultMap="ChildCourseBaseMap">
   select child_course_id
   from student_course
   where student_id = #{studentId}
-</select>
+  </select>
+  <select id="selectDetailPlus" resultMap="DetailPlusMap" >
+    select
+    <include refid="Base_Column_List" />
+    from student_course
+    where student_id = #{studentId} and child_course_id=#{childCourseId}
+  </select>
+  <select id="getStudentsBase" resultMap="StudentsBaseMap" >
+    select student_id
+    from student_course
+    where child_course_id = #{childCourseId}
+  </select>
+
+
+  <update id="updateSelective" parameterType="com.stusys.pojo.StudentCourse" >
+    update student_course
+    <set >
+      <if test="dailyScore != null" >
+        daily_score = #{dailyScore,jdbcType=DECIMAL},
+      </if>
+      <if test="examScore != null" >
+        exam_score = #{examScore,jdbcType=DECIMAL},
+      </if>
+      <if test="finalScore != null" >
+        final_score = #{finalScore,jdbcType=DECIMAL},
+      </if>
+      <if test="credit != null" >
+        credit = #{credit,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where child_course_id = #{childCourseId,jdbcType=INTEGER} and student_id = #{studentId,jdbcType=INTEGER}
+  </update>
 
 
 

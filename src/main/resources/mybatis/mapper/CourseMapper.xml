@@ -9,9 +9,23 @@
     <result column="department_id" property="departmentId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="CourseDtoMap" type="com.stusys.dto.CourseDto">
+    <result column="introductions" property="introductions" jdbcType="VARCHAR" />
+    <association property="departmentName" select="com.stusys.dao.DepartmentMapper.selectName" column="department_id" fetchType="eager"></association>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, course_id, name, introductions, department_id, create_time
   </sql>
+  <select id="selectCourseDto" resultMap="CourseDtoMap">
+    select introductions,department_id
+    from course
+    where course_id = #{courseId}
+  </select>
+
+
+
+
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

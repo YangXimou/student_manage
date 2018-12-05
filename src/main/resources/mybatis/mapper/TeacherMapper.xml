@@ -19,6 +19,9 @@
     <result column="image" property="image" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="DetailPlusMap" type="com.stusys.dto.TeacherDto" extends="BaseResultMap">
+    <association property="departmentName"  select="com.stusys.dao.DepartmentMapper.selectName" column="department_id" fetchType="eager"></association>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, teacher_id, password, name, sex, department_id, office_address, identity, political_status, 
     nationality, enrollment_date, phone, address, state, image, create_time
@@ -26,12 +29,81 @@
   <select id="getPassword" resultType="String">
     select password from teacher where teacher_id=#{teacherId}
   </select>
-  <select id="selectByTeacherId" resultMap="BaseResultMap" >
+  <select id="getName" resultType="String">
+    select name from teacher where teacher_id=#{teacherId}
+  </select>
+  <select id="selectByTeacherId" resultMap="DetailPlusMap" >
     select
     <include refid="Base_Column_List" />
     from teacher
     where teacher_id=#{teacherId}
   </select>
+  <select id="getBaseByTeacherId" resultMap="BaseResultMap" >
+    select name,office_address,identity,phone,image
+    from teacher
+    where teacher_id=#{teacherId}
+  </select>
+  <select id="selectAllBase" resultMap="BaseResultMap">
+    select teacher_id,name,image,identity
+    from teacher
+  </select>
+  <select id="fuzzySearch" resultMap="BaseResultMap">
+    select teacher_id,name,image,identity
+    from teacher
+    where teacher_id like '%${key}%' or name like '%${key}%'
+  </select>
+
+
+
+
+  <update id="updateSelective" parameterType="com.stusys.pojo.Teacher" >
+    update teacher
+    <set >
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="officeAddress != null" >
+        office_address = #{officeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="politicalStatus != null" >
+        political_status = #{politicalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null" >
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="enrollmentDate != null" >
+        enrollment_date = #{enrollmentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where teacher_id = #{teacherId,jdbcType=INTEGER}
+  </update>
 
 
 

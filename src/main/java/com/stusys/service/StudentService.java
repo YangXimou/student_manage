@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface StudentService {
     public StudentDto getDetailByStudentId(Integer studentId);
+    public StudentDto getBasePlusByStudentId(Integer studentId);
     public Integer updateSelf(Integer studentId,String phone,String address);
     public Integer changePassword(Integer studentId,String newPassword);
     public List<ChildCourse> getChildCourseByStudentId(Integer studentId, Integer pageNum, Integer pageSize);

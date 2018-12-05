@@ -1,6 +1,10 @@
 package com.stusys.dao;
 
 import com.stusys.pojo.Department;
+import com.stusys.pojo.Major;
+import com.stusys.pojo.Student;
+
+import java.util.List;
 
 public interface DepartmentMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +20,10 @@ public interface DepartmentMapper {
     int updateByPrimaryKey(Department record);
 
     String selectName(Integer departmentId);
+
+    List<Department> selectAll();
+
+    Department selectByDepartmentId(Integer departmentId);
+
+    int updateByDepartmentIdSelective(Department record);
 }

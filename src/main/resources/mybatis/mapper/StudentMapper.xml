@@ -26,8 +26,19 @@
     <association property="majorName"  select="com.stusys.dao.MajorMapper.selectName" column="major_id" fetchType="eager"></association>
     <association property="className"  select="com.stusys.dao.ClassMapper.selectName" column="class_id" fetchType="eager"></association>
   </resultMap>
-  <resultMap id="stuChildCourseMap" type="com.stusys.pojo.ChildCourse" extends="BaseResultMap">
-    <!--association的property指明了映射到返回值对象里的哪个属性，column表示用当前sql中的哪个字段作为关联查询的传入参数-->
+  <!--下面这段应该是没用的，先注释掉-->
+  <!--<resultMap id="stuChildCourseMap" type="com.stusys.pojo.ChildCourse" extends="BaseResultMap">-->
+    <!--&lt;!&ndash;association的property指明了映射到返回值对象里的哪个属性，column表示用当前sql中的哪个字段作为关联查询的传入参数&ndash;&gt;-->
+    <!--<association property="departmentName"  select="com.stusys.dao.DepartmentMapper.selectName" column="department_id" fetchType="eager"></association>-->
+    <!--<association property="majorName"  select="com.stusys.dao.MajorMapper.selectName" column="major_id" fetchType="eager"></association>-->
+    <!--<association property="className"  select="com.stusys.dao.ClassMapper.selectName" column="class_id" fetchType="eager"></association>-->
+  <!--</resultMap>-->
+  <resultMap id="BasePlusMap" type="com.stusys.dto.StudentDto" extends="BaseResultMap">
+    <result column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
     <association property="departmentName"  select="com.stusys.dao.DepartmentMapper.selectName" column="department_id" fetchType="eager"></association>
     <association property="majorName"  select="com.stusys.dao.MajorMapper.selectName" column="major_id" fetchType="eager"></association>
     <association property="className"  select="com.stusys.dao.ClassMapper.selectName" column="class_id" fetchType="eager"></association>
@@ -45,16 +56,29 @@
   <select id="getPassword" resultType="String">
     select password from student where student_id=#{studentId}
   </select>
-  <!--<select id="selectByStudentId" resultMap="BaseResultMap">-->
-    <!--select-->
-    <!--<include refid="Base_Column_List" />-->
-    <!--from student-->
-    <!--where student_id=#{studentId}-->
-  <!--</select>-->
   <select id="selectDetailByStudentId" resultMap="completeStuMap">
     select <include refid="Base_Column_List" />
     from student
     where student_id=#{studentId}
+  </select>
+  <select id="selectBaseByStudentId" resultMap="BaseResultMap">
+    select student_id,name,phone,image
+    from student
+    where student_id=#{studentId}
+  </select>
+  <select id="getBasePlusByStudentId" resultMap="BasePlusMap">
+    select student_id,name,phone,image,department_id, major_id, grade, class_id
+    from student
+    where student_id=#{studentId}
+  </select>
+  <select id="selectAllBase" resultMap="BaseResultMap">
+    select student_id,name,image,state
+    from student
+  </select>
+  <select id="fuzzySearch" resultMap="BaseResultMap">
+    select student_id,name,image,state
+    from student
+    where student_id like '%${key}%' or name like '%${key}%'
   </select>
 
 

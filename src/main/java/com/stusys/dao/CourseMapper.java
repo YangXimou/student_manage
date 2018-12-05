@@ -1,5 +1,6 @@
 package com.stusys.dao;
 
+import com.stusys.dto.CourseDto;
 import com.stusys.pojo.Course;
 
 public interface CourseMapper {
@@ -14,4 +15,6 @@ public interface CourseMapper {
     int updateByPrimaryKeySelective(Course record);
 
     int updateByPrimaryKey(Course record);
+
+    CourseDto selectCourseDto(Integer courseId);
 }

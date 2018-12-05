@@ -30,6 +30,12 @@ public class StudentServiceImpl implements StudentService {
         StudentDto studentDto=studentMapper.selectDetailByStudentId(studentId);
         return studentDto;
     }
+    //    根据学号获取学生基本信息
+    //   （包括：学生学号、姓名、性别、院系名称、专业名称、年级、班级名称、联系电话、照片）
+    public StudentDto getBasePlusByStudentId(Integer studentId){
+        StudentDto studentDto=studentMapper.getBasePlusByStudentId(studentId);
+        return studentDto;
+    }
     //    修改学生的联系号码、家庭住址
     public Integer updateSelf(Integer studentId,String phone,String address){
         Student student=new Student();
@@ -48,10 +54,7 @@ public class StudentServiceImpl implements StudentService {
 
     public List<ChildCourse> getChildCourseByStudentId(Integer studentId, Integer pageNum, Integer pageSize){
         PageHelper.startPage(pageNum, pageSize);
-        List<Integer> childCourseIdList = studentCourseMapper.selectChildCourseId(studentId);
-        List<ChildCourse> childCourseList=new ArrayList<>();
-        for(Integer childCourseId:childCourseIdList)
-            childCourseList.add(childCourseMapper.selectByChildCourseId(childCourseId));
+        List<ChildCourse> childCourseList=studentCourseMapper.selectChildCourseBase(studentId);
         return childCourseList;
     }
 }

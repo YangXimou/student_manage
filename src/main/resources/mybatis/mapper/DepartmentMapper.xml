@@ -16,6 +16,35 @@
     from department
     where department_id = #{departmentId}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from department
+  </select>
+  <select id="selectByDepartmentId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from department
+    where department_id = #{departmentId}
+  </select>
+
+
+
+  <update id="updateByDepartmentIdSelective" parameterType="com.stusys.pojo.Department" >
+    update department
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="introductions != null" >
+        introductions = #{introductions,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </update>
 
 
 

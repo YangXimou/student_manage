@@ -9,6 +9,9 @@
     <result column="introductions" property="introductions" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="DetailPlusMap" type="com.stusys.dto.MajorDto" extends="BaseResultMap">
+    <association property="departmentName" select="com.stusys.dao.DepartmentMapper.selectName" column="department_id" fetchType="eager"></association>
+  </resultMap>
   <sql id="Base_Column_List" >
     id, major_id, department_id, name, introductions, create_time
   </sql>
@@ -17,6 +20,37 @@
     from major
     where major_id = #{majorId}
   </select>
+  <select id="selectAllBase" resultMap="BaseResultMap">
+    select major_id,name,introductions
+    from major
+  </select>
+  <select id="selectByMajorId" resultMap="DetailPlusMap">
+    select
+    <include refid="Base_Column_List" />
+    from major
+    where major_id = #{majorId}
+  </select>
+
+
+
+  <update id="updateByMajorIdSelective" parameterType="com.stusys.pojo.Major" >
+    update major
+    <set >
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="introductions != null" >
+        introductions = #{introductions,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where major_id = #{majorId}
+  </update>
 
 
 

@@ -31,6 +31,14 @@ public class StudenController {
         }
         return ResultVOUtil.error("获取学生详细信息失败");
     }
+    @GetMapping("/getStudentBaseInfoByStudentId")
+    public ResultVO getStudentBaseInfoByStudentId(Integer studentId){
+        StudentDto studentDto=studentService.getBasePlusByStudentId(studentId);
+        if(studentDto!=null){
+            return ResultVOUtil.success(studentDto);
+        }
+        return ResultVOUtil.error("获取学生基本信息失败");
+    }
     @PostMapping("/updateStudentInfo")
     public ResultVO updateStudentInfo(Integer studentId,String phone,String address){
         Integer result=studentService.updateSelf(studentId,phone,address);
@@ -47,8 +55,8 @@ public class StudenController {
         }
         return ResultVOUtil.error("修改密码失败");
     }
-    @GetMapping("/getChileCourseByStudentId")
-    public ResultVO getChileCourseByStudentId(Integer studentId,Integer pageNum,Integer pageSize){
+    @GetMapping("/getChildCourseByStudentId")
+    public ResultVO getChildCourseByStudentId(Integer studentId,Integer pageNum,Integer pageSize){
         List<ChildCourse> childCourseList=studentService.getChildCourseByStudentId(studentId,pageNum,pageSize);
         if(childCourseList!=null){
             return ResultVOUtil.success(childCourseList);

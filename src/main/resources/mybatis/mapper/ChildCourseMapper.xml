@@ -11,8 +11,12 @@
     <result column="state" property="state" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <resultMap id="DetailPlusMap" type="">
-
+  <resultMap id="DetailPlusMap" type="com.stusys.dto.ChildCourseDto">
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="credit" property="credit" jdbcType="DECIMAL" />
+    <result column="class_time" property="classTime" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <association property="courseDto" select="com.stusys.dao.CourseMapper.selectCourseDto" column="course_id" fetchType="eager"></association>
   </resultMap>
   <sql id="Base_Column_List" >
     id, child_course_id, course_id, name, credit, class_time, state, create_time
@@ -23,13 +27,11 @@
     from child_course
     where child_course_id = #{childCourseId}
   </select>
-  <select id="selectDetailPlus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
+  <select id="selectDetailPlus" resultMap="DetailPlusMap" >
+    select name,credit,class_time,state,course_id
     from child_course
     where child_course_id = #{childCourseId}
   </select>
-
 
 
 
