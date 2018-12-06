@@ -30,7 +30,7 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherCourseMapper teacherCourseMapper;
 
     public Integer getNewTeacherId(Integer departmentId){
-        String key=Calendar.getInstance().get(Calendar.YEAR)+departmentId+"";
+        String key=departmentId.toString()+Calendar.getInstance().get(Calendar.YEAR);
         Integer newestTeacherId=teacherMapper.getNewestTeacherId(key);
         if(newestTeacherId==null)
             return Integer.parseInt(key+"0001");
