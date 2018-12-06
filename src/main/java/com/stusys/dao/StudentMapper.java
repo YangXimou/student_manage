@@ -32,4 +32,6 @@ public interface StudentMapper {
     List<Student> selectAllBase();
 
     List<Student> fuzzySearch(@Param("key") String key);
+
+    Integer getNewestStudentId(Integer classId);
 }

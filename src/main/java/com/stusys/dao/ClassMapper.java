@@ -3,6 +3,7 @@ package com.stusys.dao;
 import com.stusys.dto.ClassDto;
 import com.stusys.pojo.Class;
 import com.stusys.pojo.Major;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,5 +27,7 @@ public interface ClassMapper {
     List<ClassDto> selectAllBasePlus();
 
     ClassDto selectDetailPlusByClassId(Integer classId);
+
+    Integer getNewestClassId (@Param("grade") Integer grade, @Param("majorId") Integer majorId);
 
 }

@@ -6,6 +6,9 @@ import com.stusys.pojo.*;
 import com.stusys.pojo.Class;
 import com.stusys.vo.ResultVO;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -27,8 +30,14 @@ public interface ManagerService {
 
     public Integer updateDepartment(Integer departmentId,String name,String introductions);
     public Integer updateMajor(Integer majorId,Integer departmentId,String name,String introductions);
+    public Integer updateClass(Integer classId,Integer majorId,Integer departmentId,String name,Integer grade);
+    public Integer updateStudent(HttpServletRequest request) throws ParseException;
+    public Integer updateTeacher(HttpServletRequest request) throws ParseException;
+
     public Integer insertDepartment(Integer departmentId,String name,String introductions);
     public Integer insertMajor(Integer majorId,Integer departmentId,String name,String introductions);
-    public Integer updateClass(Integer classId,Integer majorId,Integer departmentId,String name,Integer grade);
+    public Integer insertClass(Integer classId,Integer majorId,Integer departmentId,Integer grade,String name);
+    public Integer insertStudent(HttpServletRequest request) throws ParseException;
+    public Integer insertTeacher(HttpServletRequest request) throws ParseException;
 
 }

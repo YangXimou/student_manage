@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,6 +28,15 @@ public class TeacherServiceImpl implements TeacherService {
     private StudentCourseMapper studentCourseMapper;
     @Autowired
     private TeacherCourseMapper teacherCourseMapper;
+
+    public Integer getNewTeacherId(Integer departmentId){
+        String key=Calendar.getInstance().get(Calendar.YEAR)+departmentId+"";
+        Integer newestTeacherId=teacherMapper.getNewestTeacherId(key);
+        if(newestTeacherId==null)
+            return Integer.parseInt(key+"0001");
+        return newestTeacherId+1;
+    }
+
     public Teacher getTeacherBase(Integer teacherId){
         return teacherMapper.getBaseByTeacherId(teacherId);
     }

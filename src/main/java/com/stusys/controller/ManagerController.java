@@ -7,9 +7,21 @@ import com.stusys.pojo.Class;
 import com.stusys.service.ManagerService;
 import com.stusys.util.ResultVOUtil;
 import com.stusys.vo.ResultVO;
+import com.sun.corba.se.spi.ior.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -128,6 +140,20 @@ public class ManagerController {
             return ResultVOUtil.success();
         return ResultVOUtil.error("更新班级信息失败");
     }
+    @RequestMapping("/updateStudent")
+    public ResultVO updateStudent(HttpServletRequest request) throws ParseException {
+        Integer result=managerService.updateStudent(request);
+        if(result!=0)
+            return ResultVOUtil.success();
+        return ResultVOUtil.error("更新学生信息失败");
+    }
+    @RequestMapping("/updateTeacher")
+    public ResultVO updateTeacher(HttpServletRequest request) throws ParseException {
+        Integer result=managerService.updateTeacher(request);
+        if(result!=0)
+            return ResultVOUtil.success();
+        return ResultVOUtil.error("更新教师信息失败");
+    }
 
 
 
@@ -145,4 +171,26 @@ public class ManagerController {
             return ResultVOUtil.success();
         return ResultVOUtil.error("添加专业失败");
     }
+    @PostMapping("/insertClass")
+    public ResultVO insertClass(Integer classId,Integer majorId,Integer departmentId,Integer grade,String name){
+        Integer result=managerService.insertClass(classId,majorId,departmentId,grade,name);
+        if(result!=0)
+            return ResultVOUtil.success();
+        return ResultVOUtil.error("添加班级失败");
+    }
+    @RequestMapping("/insertStudent")
+    public ResultVO insertStudent(HttpServletRequest request) throws ParseException {
+        Integer result=managerService.insertStudent(request);
+        if(result!=0)
+            return ResultVOUtil.success();
+        return ResultVOUtil.error("添加学生失败");
+    }
+    @RequestMapping("/insertTeacher")
+    public ResultVO insertTeacher(HttpServletRequest request) throws ParseException {
+        Integer result=managerService.insertTeacher(request);
+        if(result!=0)
+            return ResultVOUtil.success();
+        return ResultVOUtil.error("添加教师失败");
+    }
+
 }

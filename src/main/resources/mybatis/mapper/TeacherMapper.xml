@@ -52,6 +52,11 @@
     from teacher
     where teacher_id like '%${key}%' or name like '%${key}%'
   </select>
+  <select id="getNewestTeacherId" resultType="Integer">
+    select max(teacher_id)
+    from teacher
+    where teacher_id like '%${key}'
+  </select>
 
 
 

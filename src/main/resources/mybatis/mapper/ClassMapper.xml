@@ -34,6 +34,11 @@
     from class
     where class_id = #{classId}
   </select>
+  <select id="getNewestClassId" resultType="Integer">
+    select max(class_id)
+    from class
+    where grade = #{grade} and major_id = #{majorId}
+  </select>
 
 
 

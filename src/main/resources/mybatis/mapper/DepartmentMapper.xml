@@ -27,6 +27,10 @@
     from department
     where department_id = #{departmentId}
   </select>
+  <select id="getNewestDepartmentId" resultType="Integer">
+    select max(department_id)
+    from department
+  </select>
 
 
 

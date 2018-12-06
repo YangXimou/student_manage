@@ -33,4 +33,6 @@ public interface TeacherMapper {
     List<Teacher> selectAllBase();
 
     List<Teacher> fuzzySearch(@Param("key") String key);
+
+    Integer getNewestTeacherId(@Param("key") String key);
 }

@@ -26,4 +26,6 @@ public interface MajorMapper {
     List<Major> selectAllBase();
 
     MajorDto selectByMajorId(Integer majorId);
+
+    Integer getNewestMajorId(Integer departmentId);
 }

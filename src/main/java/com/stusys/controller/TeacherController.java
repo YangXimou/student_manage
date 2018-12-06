@@ -24,6 +24,14 @@ import java.util.List;
 public class TeacherController {
     @Autowired
     private TeacherService teacherService;
+    //添加新教工时返回其工号
+    @RequestMapping("/getNewTeacherId")
+    public ResultVO getNewTeacherId(Integer departmentId){
+        Integer newTeacherId=teacherService.getNewTeacherId(departmentId);
+        if(newTeacherId!=null)
+            return ResultVOUtil.success(newTeacherId);
+        return ResultVOUtil.error("返回新教工工号失败");
+    }
 //    学生根据教师id获取教师的基本信息，
 //    包括：照片、姓名、职务、联系电话、办公室地址
     @GetMapping("/getTeacherBaseByTeacherId")

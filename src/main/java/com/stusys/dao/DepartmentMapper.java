@@ -26,4 +26,6 @@ public interface DepartmentMapper {
     Department selectByDepartmentId(Integer departmentId);
 
     int updateByDepartmentIdSelective(Department record);
+
+    Integer getNewestDepartmentId();
 }

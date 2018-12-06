@@ -80,6 +80,11 @@
     from student
     where student_id like '%${key}%' or name like '%${key}%'
   </select>
+  <select id="getNewestStudentId" resultType="Integer">
+    select max(student_id)
+    from student
+    where class_id=#{classId}
+  </select>
 
 
 

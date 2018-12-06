@@ -23,6 +23,13 @@ import java.util.List;
 public class StudenController {
     @Autowired
     private StudentService studentService;
+    @RequestMapping("/getNewStudentId")
+    public ResultVO getNewStudentId(Integer classId){
+        Integer newStudentId=studentService.getNewStudentId(classId);
+        if(newStudentId!=null)
+            return ResultVOUtil.success(newStudentId);
+        return ResultVOUtil.error("返回新生学号失败");
+    }
     @GetMapping("/getStudentInfoByStudentId")
     public ResultVO getStudentInfoByStudentId(Integer studentId){
         StudentDto studentDto=studentService.getDetailByStudentId(studentId);

@@ -25,6 +25,13 @@ public class StudentServiceImpl implements StudentService {
     private ChildCourseMapper childCourseMapper;
     @Autowired
     private StudentCourseMapper studentCourseMapper;
+    //添加学生时获取返回该新生的学号
+    public Integer getNewStudentId(Integer classId){
+        Integer newStudentId=studentMapper.getNewestStudentId(classId);
+        if(newStudentId==null)
+            return Integer.parseInt(classId+"001");
+        return newStudentId+1;
+    }
     //    根据学号获取学生详细信息
     public StudentDto getDetailByStudentId(Integer studentId){
         StudentDto studentDto=studentMapper.selectDetailByStudentId(studentId);
