@@ -11,6 +11,7 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap id="BasePlusMap" type="com.stusys.dto.ClassDto">
+    <result column="class_id" property="classId" jdbcType="INTEGER" />
     <result column="grade" property="grade" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <association property="departmentName"  select="com.stusys.dao.DepartmentMapper.selectName" column="department_id" fetchType="eager"></association>
@@ -25,7 +26,7 @@
     where class_id = #{classId}
   </select>
   <select id="selectAllBasePlus" resultMap="BasePlusMap">
-    select department_id,grade,name
+    select class_id,department_id,grade,name
     from class
   </select>
   <select id="selectDetailPlusByClassId" resultMap="DetailPlusMap">
