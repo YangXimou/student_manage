@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-12-05 18:02:11
+Date: 2018-12-09 18:49:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -62,7 +62,7 @@ CREATE TABLE `class` (
   KEY `fk_class_major_1` (`major_id`),
   CONSTRAINT `fk_class_department_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`),
   CONSTRAINT `fk_class_major_1` FOREIGN KEY (`major_id`) REFERENCES `major` (`major_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of class
@@ -70,6 +70,8 @@ CREATE TABLE `class` (
 INSERT INTO `class` VALUES ('1', '1511001', '11', '11001', '2015', '2015级软件工程专业1班', '2018-12-04 13:51:21');
 INSERT INTO `class` VALUES ('2', '1612001', '12', '12001', '2016', '2016将应用数学专业1班', '2018-12-04 13:51:46');
 INSERT INTO `class` VALUES ('3', '1611001', '11', '11001', '2016', '2016级软件工程专业1班', '2018-12-05 18:00:20');
+INSERT INTO `class` VALUES ('4', '1711001', '11', '11001', '2017', '2017级软件工程专业1班', '2018-12-05 20:49:24');
+INSERT INTO `class` VALUES ('5', '1511013', '11', '1101', '2015', '2015级物联网工程专业3班', '2018-12-06 13:55:32');
 
 -- ----------------------------
 -- Table structure for course
@@ -110,14 +112,15 @@ CREATE TABLE `department` (
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `department_id` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of department
 -- ----------------------------
 INSERT INTO `department` VALUES ('1', '11', '计算机学院', '这是计算机学院的简介', '2018-12-04 13:48:47');
 INSERT INTO `department` VALUES ('2', '12', '数学与统计学院', '这是数学与统计学院的简介', '2018-12-04 13:48:52');
-INSERT INTO `department` VALUES ('14', '13', '生科院', '这是生科院的简介', '2018-12-05 16:34:45');
+INSERT INTO `department` VALUES ('14', '13', '生命科学学院', '这是生命科学学院的简介', '2018-12-05 16:34:45');
+INSERT INTO `department` VALUES ('15', '14', '政法学院', '这是政法学院的简介', '2018-12-09 18:31:07');
 
 -- ----------------------------
 -- Table structure for major
@@ -134,7 +137,7 @@ CREATE TABLE `major` (
   UNIQUE KEY `major_id` (`major_id`),
   KEY `fk_major_department_1` (`department_id`),
   CONSTRAINT `fk_major_department_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of major
@@ -143,6 +146,8 @@ INSERT INTO `major` VALUES ('1', '11001', '11', '软件工程', '软件工程专
 INSERT INTO `major` VALUES ('2', '12001', '12', '统计学', '统计学专业', '2018-12-04 13:49:59');
 INSERT INTO `major` VALUES ('3', '11002', '11', '网络工程', '网络工程专业', '2018-12-05 17:11:44');
 INSERT INTO `major` VALUES ('4', '13001', '13', '园林', '园林专业', '2018-12-05 17:18:02');
+INSERT INTO `major` VALUES ('5', '1101', '11', '物联网工程', '物联网工程专业', '2018-12-06 13:54:35');
+INSERT INTO `major` VALUES ('7', '11003', '11', '计算机科学与技术', '这是计算机科学与技术的简介', '2018-12-09 18:47:59');
 
 -- ----------------------------
 -- Table structure for manager
@@ -193,12 +198,12 @@ CREATE TABLE `student` (
   CONSTRAINT `fk_student_department_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`),
   CONSTRAINT `fk_student_major_1` FOREIGN KEY (`major_id`) REFERENCES `major` (`major_id`),
   CONSTRAINT `student_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `class` (`class_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES ('1', '111', '147258', 'simon', 'male', '11', '11001', '2015', '1511001', '共产党员', '汉', '2018-12-04 00:00:00', '147258', '1hello', '1', '/kk/m.jpg', '2018-11-29 09:34:40');
+INSERT INTO `student` VALUES ('1', '111', '147258', 'simon', 'male', '11', '11001', '2015', '1511001', '共产党员', '汉', '2018-12-04 00:00:00', '147258', '1hello', '1', '/image/1511023004userImg.png', '2018-11-29 09:34:40');
 INSERT INTO `student` VALUES ('2', '222', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-12-02 22:06:10');
 INSERT INTO `student` VALUES ('3', '333', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-12-02 22:06:19');
 INSERT INTO `student` VALUES ('4', '444', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-12-02 22:06:20');
@@ -207,6 +212,12 @@ INSERT INTO `student` VALUES ('6', '666', '123', null, null, null, null, null, n
 INSERT INTO `student` VALUES ('7', '777', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-12-02 22:06:21');
 INSERT INTO `student` VALUES ('8', '888', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-12-02 22:06:22');
 INSERT INTO `student` VALUES ('9', '999', '123', null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-12-02 22:06:23');
+INSERT INTO `student` VALUES ('10', '132', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2018-12-06 10:35:56');
+INSERT INTO `student` VALUES ('12', '1511013001', '5656565656', 'qq', '男', '11', '1101', '2015', '1511013', '共产党员', '汉', '2018-12-06 00:00:00', '12345678910', 'address', '1', '/image/1511012001userImg.', '2018-12-06 14:21:49');
+INSERT INTO `student` VALUES ('13', '1511013002', '111', 'qq', '男', '11', '1101', '2015', '1511013', '共青团员', '汉', '2018-12-06 00:00:00', '12345678910', 'address', '1', '/image/1511012002userImg.png', '2018-12-06 14:24:36');
+INSERT INTO `student` VALUES ('14', '1511013003', '111', 'qq', '男', '11', '1101', '2015', '1511013', '共青团员', '汉', '2018-12-06 00:00:00', '', '', '1', '/image/1511012003userImg.jpg', '2018-12-06 14:27:16');
+INSERT INTO `student` VALUES ('15', '1511013004', '123123', '杨喜谋', '男', '11', '1101', '2015', '1511013', '共产党员', '汉', '2018-12-06 00:00:00', '13030303030', '黄洲工业区', '1', '/image/1511012004userImg.png', '2018-12-07 09:22:29');
+INSERT INTO `student` VALUES ('16', '1511013005', '111', 'hello', '女', '11', '1101', '2015', '1511013', '共青团员', '汉', '2018-12-06 00:00:00', '13434341212', '黄洲工业区', '1', '/image/1511013005userImg.png', '2018-12-09 18:34:43');
 
 -- ----------------------------
 -- Table structure for student_course
@@ -264,14 +275,15 @@ CREATE TABLE `teacher` (
   UNIQUE KEY `teacher_id` (`teacher_id`) USING BTREE,
   KEY `fk_teacher_department_1` (`department_id`),
   CONSTRAINT `fk_teacher_department_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of teacher
 -- ----------------------------
-INSERT INTO `teacher` VALUES ('1', '10000', '456', '朱老师', 'male', '11', '中巴软件园101', '教授', '共产党员', '汉族', '2010-02-05 00:00:00', '15050505050', '教师公寓1栋', '1', '/lklk/oko/lll.jpg', '2018-12-04 11:23:26');
-INSERT INTO `teacher` VALUES ('2', '10001', '456', '马老师', 'female', '12', '数学院202', '讲师', '共产党员', '汉族', '2018-12-13 01:52:10', '16060606060', '教师公寓1栋', '1', '/lklk/oko/lll.jpg', '2018-12-04 11:23:29');
+INSERT INTO `teacher` VALUES ('1', '10000', '123', '朱老师', 'male', '11', '中巴软件园101', '教授', '共产党员', '汉族', '2010-02-05 00:00:00', '12345679810', '是中文！', '1', '/lklk/oko/lll.jpg', '2018-12-04 11:23:26');
+INSERT INTO `teacher` VALUES ('2', '10001', '456', '马老师', 'female', '12', '数学院202', '讲师', '共产党员', '汉族', '2018-12-13 01:52:10', '12345679810', '中文地址哦！！！', '1', '/lklk/oko/lll.jpg', '2018-12-04 11:23:29');
 INSERT INTO `teacher` VALUES ('3', '10002', 'newpassword', '杨老师', 'male', '11', '中巴软件园606', '副主任', '共产党员', '汉族', '2018-12-03 01:52:51', '12345679810', 'new address', '1', '/lklk/oko/lll.jpg', '2018-12-04 11:23:35');
+INSERT INTO `teacher` VALUES ('4', '201511001', 'qwqwqwqw', 'qq', '男', '11', null, '教授', '共青团员', '汉', '2018-12-06 00:00:00', '12345678910', 'address', '1', '/image/201511001userImg.jpg', '2018-12-06 14:47:07');
 
 -- ----------------------------
 -- Table structure for teacher_course

@@ -24,6 +24,12 @@
     select major_id,name,introductions
     from major
   </select>
+  <select id="selectByMajorId" resultMap="DetailPlusMap">
+    select
+  <include refid="Base_Column_List" />
+    from major
+    where major_id = #{majorId}
+  </select>
   <select id="getNewestMajorId" resultType="Integer">
     select max(major_id)
     from major
